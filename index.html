@@ -15,8 +15,6 @@
         var ctx;
 
 
-
-
         $(document).ready(function(){
             console.log("ready");
             sb = new Spacebrew.Client(sb_server, sb_client_name, sb_description, {reconnect : true});
@@ -25,7 +23,8 @@
             sb.onError = function(message){console.log("error: " + message);};
             sb.onStringMessage = sbOnStringMessage;
             sb.addSubscribe("setImageUrlAtLocationAndSize", "string");
-            sb.addPublish("sendSetImage", "string");
+            sb.addSubscribe("setColorRectAtLocationAndSize", "string");
+            sb.addPublish("sendSetMessage", "string");
             sb.connect();
 
             var canvas = document.getElementById('lenscanvas');
@@ -41,11 +40,55 @@
             $("#sendit").click(function(){
                 var value = $("#sendstring").val();
                 console.log("got value " + value);
-                sb.send("sendSetImage", "string", value);
+                sb.send("sendSetMessage", "string", value);
             });
 
         });
 
+        
+        function setColorRectAtLocationAndSize(message){
+            // format:
+            // color|x|y|w|h|r
+            var split = message.split("|");
+            var color, x, y, w, h, r = false;
+            if(split.length >= 1){
+                color = split[0];
+            }
+            if(split.length >= 2){
+                x = parseFloat(split[1]);
+            }
+            if(split.length >= 3){
+                y = parseFloat(split[2]);
+            }
+            if(split.length >= 4){
+                w = parseFloat(split[3]);
+            }
+            if(split.length >= 5){
+                h = parseFloat(split[4]);
+            }
+            if(split.length >= 6){
+                r = parseFloat(split[5]);
+            }
+            console.log("setting " + color + ", " + x +", "+ y + ", " + w + ", " + h + ", " + r);
+            var sum = x+ y;
+            console.log("sum : " + sum);
+            if(!r){
+                r = 0;
+            }
+//                tx = x + (w / 2 );
+//                ty = y + (h / 2);
+            tx = x;
+            ty = y;
+            console.log("translating " + tx + " , " + ty);
+            ctx.translate(tx, ty);
+            ctx.rotate(r * Math.PI / 180);
+            ctx.fillStyle = color;
+            ctx.rect(0 - (w / 2) ,0 - ( h /2), w, h);
+            ctx.fill();
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+            
+        }
 
         function setImageUrlAtLocationAndSize(message){
 
@@ -108,6 +151,9 @@
                 case "setImageUrlAtLocationAndSize":
                     setImageUrlAtLocationAndSize(value);
                 break;
+                case "setColorRectAtLocationAndSize":
+                    setColorRectAtLocationAndSize(value);
+                break;
                 default:
                     console.log("unknown command " + name);
                 break;
@@ -132,7 +178,8 @@
     </canvas>
     <input id="sendstring" type="text" size="80">
     <span id="sendit">send</span><BR>
-    try images/Maker Hub logo bw 5 (3).jpg|0|0|250|250|45
+    try images/Maker Hub logo bw 5 (3).jpg|0|0|250|250|45<br/>
+    try red|50|50|250|250|45<br/>
     <BR>server at <a href="http://sandbox.spacebrew.cc" target="_new">sandbox.spacebrew.cc</a>
 </body>
 </html>

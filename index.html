@@ -32,8 +32,8 @@
             // px/screen = in/table
             // px = in/table * screen
             
-            var out_px = (in_x / table_width) * screen_width;
-            var out_py = (in_y / table_height) * screen_height;
+            var out_px = (in_x / table_width_in) * screen_width;
+            var out_py = (in_y / table_height_in) * screen_height;
             
             return {x: out_px, y: out_py};
             
@@ -56,7 +56,7 @@
             var canvas = document.getElementById('lenscanvas');
             ctx = canvas.getContext('2d');
 
-            var lens1_conv = convert_in_to_px(lens1_x_in, lens2_y_in);
+            var lens1_conv = convert_in_to_px(lens1_x_in, lens1_y_in);
             var lens1_x_px = lens1_conv.x;
             var lens1_y_px = lens1_conv.y;
             

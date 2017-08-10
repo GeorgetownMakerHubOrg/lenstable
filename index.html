@@ -32,12 +32,12 @@
             ctx = canvas.getContext('2d');
 
 
-        //    setImageUrlAtLocationAndSize("images/Maker Hub logo bw 5 (3).jpg|0|0|250|250|45");
+            setImageUrlAtLocationAndSize("images/Maker Hub logo bw 5 (3).jpg|150|500|400|400|0");
         //    setImageUrlAtLocationAndSize("images/LaserCutter2.png|150|200|250|250|90");
 //            setColorRectAtLocationAndSize("red|150|100|50|50|0");
 //            setColorRectAtLocationAndSize("red|150|100|50|50|45");
 
-            setTextAtLocationAndSize("Hello World Hello World|150|100|150|150|0");
+        //    setTextAtLocationAndSize("Hello World Hello World|150|100|150|150|0");
             $("#sendit").click(function(){
                 var value = $("#sendstring").val();
                 console.log("got value " + value);
@@ -311,15 +311,17 @@ http://andreinc.net/2012/11/14/painting-and-wrapping-a-text-inside-a-rectangular
     </script>
 </head>
 <body>
-    <canvas id="lenscanvas" width="1280" height="400">
+    <canvas id="lenscanvas" width="1920" height="780">
 
     </canvas>
+    <!--
     <input id="sendstring" type="text" size="80">
     <span id="sendit">send</span><BR>
     try images/Maker Hub logo bw 5 (3).jpg|0|0|250|250|45<br/>
     try red|50|50|250|250|45<br/>
     try HELLO WORLD|50|50|250|250|45<br/>
     server at <a href="http://spacebrew.github.io/spacebrew/admin/admin.html?server=localhost" target="_new">http://spacebrew.github.io/spacebrew/admin/admin.html?server=localhost</a>
+-->
 </body>
 </html>
 

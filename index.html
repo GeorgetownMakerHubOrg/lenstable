@@ -13,6 +13,31 @@
         var sb_client_name = app_name;
         var sb_description = "a table that shows images through lenses";
         var ctx;
+        
+        //48" x 30"
+        var screen_height = 780;
+        var screen_width = 1920;
+        
+        var table_width_in = 48;
+        var table_height_in = 30;
+        var screen_border_in = 2;
+        
+        var lens1_x_in = 11;
+        var lens1_y_in = 20.75;
+        
+        var convert_in_to_px(in_x, in_y){
+            in_x = in_x - screen_border_in;
+            in_y = in_y - screen_border_in;
+            
+            // px/screen = in/table
+            // px = in/table * screen
+            
+            out_px = (in_x / table_width) * screen_width;
+            out_py = (in_y / table_height) * screen_height;
+            
+            return {x: out_pw, y: out_py};
+            
+        }
 
 
         $(document).ready(function(){
@@ -31,8 +56,12 @@
             var canvas = document.getElementById('lenscanvas');
             ctx = canvas.getContext('2d');
 
+            var lens1_conv = convert_in_to_px(lens1_x_in, lens2_y_in);
+            var lens1_x_px = lens1_conv.x;
+            var lens1_y_px = lens1_conv.y;
+            
 
-            setImageUrlAtLocationAndSize("images/Maker Hub logo bw 5 (3).jpg|150|500|400|400|0");
+            setImageUrlAtLocationAndSize("images/Maker Hub logo bw 5 (3).jpg|"+lens1_x_px+"|"+lens1_y_px+"|500|400|400|0");
         //    setImageUrlAtLocationAndSize("images/LaserCutter2.png|150|200|250|250|90");
 //            setColorRectAtLocationAndSize("red|150|100|50|50|0");
 //            setColorRectAtLocationAndSize("red|150|100|50|50|45");

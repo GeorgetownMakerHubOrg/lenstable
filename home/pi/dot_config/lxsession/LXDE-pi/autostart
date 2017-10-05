@@ -1,0 +1,9 @@
+@lxpanel --profile LXDE-pi
+@pcmanfm --desktop --profile LXDE-pi
+@xscreensaver -no-splash
+@point-rpi
+@xset s off
+@xset -dpms
+@xset s noblank
+@touch /home/pi/xstart.txt
+@chromium-browser --noerrdialogs --incognito --kiosk file:///home/pi/lenstable/index_googlerefresh.html

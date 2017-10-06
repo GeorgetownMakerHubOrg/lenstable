@@ -29,6 +29,7 @@ sudo apt-get install chromium-browser x11-xserver-utils unclutter
 
 # copy lxsession config file
 sudo cp home/pi/dot_config/lxsession/LXDE-pi/autostart /home/pi/.config/lxsession/LXDE-pi/autostart
+# then edit autostart for the html file you want to display
 
 
 #install mlocate

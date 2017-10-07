@@ -32,21 +32,7 @@
         var lens2_x = 0;
         var lens2_y =0;
         var lens2_d = 0;
-
-        var lens1_obj = false;
-        var lens2_obj = false;
-        var lens3_obj = false;
-        var lens4_obj = false;
-
-
-    function parseSVG(s) {
-        var div= document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
-        div.innerHTML= '<svg xmlns="http://www.w3.org/2000/svg">'+s+'</svg>';
-        var frag= document.createDocumentFragment();
-        while (div.firstChild.firstChild)
-            frag.appendChild(div.firstChild.firstChild);
-        return frag;
-    }
+        
         
         var convert_in_to_px = function(in_x, in_y){
             in_x = in_x - screen_border_in;
@@ -71,26 +57,21 @@
             sb.onError = function(message){console.log("error: " + message);};
             sb.onStringMessage = sbOnStringMessage;
             sb.addSubscribe("setImageUrlAtLocationAndSize", "string");
-            sb.addSubscribe("setImageUrlAtLens1", "string");
-            sb.addSubscribe("setImageUrlAtLens2", "string");
-            sb.addSubscribe("setImageUrlAtLens3", "string");
-            sb.addSubscribe("setImageUrlAtLens4", "string");
             sb.addSubscribe("setColorRectAtLocationAndSize", "string");
             sb.addSubscribe("setTextAtLocationAndSize", "string");
             sb.addPublish("sendSetMessage", "string");
             sb.connect();
 
-/*
             var canvas = document.getElementById('lenscanvas');
             ctx = canvas.getContext('2d');
-*/
+
             var lens1_conv = convert_in_to_px(lens1_x_in, lens1_y_in);
             var lens1_x_px = lens1_conv.x;
             var lens1_y_px = lens1_conv.y;
             
 
-            setImageUrlAtLens1("images/Maker Hub logo bw 5 (3).jpg");
-            setImageUrlAtLens2("images/catwater.gif");
+            setImageUrlAtLocationAndSize("images/Maker Hub logo bw 5 (3).jpg|190|560|150|155|0");
+            setImageUrlAtLocationAndSize("images/catwater.gif|460|445|155|155|0");
         //    setImageUrlAtLocationAndSize("images/LaserCutter2.png|150|200|250|250|90");
 //            setColorRectAtLocationAndSize("red|150|100|50|50|0");
 //            setColorRectAtLocationAndSize("red|150|100|50|50|45");
@@ -103,8 +84,6 @@
             });
 
         });
-
-
 
         
         function setColorRectAtLocationAndSize(message){
@@ -151,24 +130,6 @@
             
         }
 
-        function setImageUrlAtLens1(message){
-            setImageUrlAtLocationAndSize(message+"|190|560|150|155|0");
-
-        }
-        function setImageUrlAtLens2(message){
-            setImageUrlAtLocationAndSize(message+"|460|445|155|155|0");
-
-        }
-
-        function setImageUrlAtLens1(message){
-            setImageUrlAtLocationAndSize(message+"|190|560|150|155|0");
-
-        }
-        function setImageUrlAtLens1(message){
-            setImageUrlAtLocationAndSize(message+"|190|560|150|155|0");
-
-        }
-
         function setImageUrlAtLocationAndSize(message){
 
             // format:
@@ -210,24 +171,15 @@
                 if(!r){
                     r = 0;
                 }
-                tx = x + (w / 2 );
-                ty = y + (h / 2);
-//                tx = x;
- //               ty = y;
+//                tx = x + (w / 2 );
+//                ty = y + (h / 2);
+                tx = x;
+                ty = y;
                 console.log("translating " + tx + " , " + ty);
-
-//                var transform = " translate("+tx+" "+ty+") rotate("+r * Math.PI / 180+")";
-                var transform = "rotate("+r +" " +tx+ " " +ty+ ")";
-
-                console.log(transform);
-
-                $("#lenscanvas").append(parseSVG("<image xlink:href='"+url+"' width='"+w+"px' height='"+h+"px' x='"+x+"' y='"+y+"' transform='"+transform+"' />"));
-/*
                 ctx.translate(tx, ty);
                 ctx.rotate(r * Math.PI / 180);
                 ctx.drawImage(image, 0 - (w / 2) ,0 - ( h /2), w, h);
                 ctx.setTransform(1, 0, 0, 1, 0, 0);
-                */
             };
             image.src = url;
         }
@@ -277,18 +229,6 @@
             switch (name) {
                 case "setImageUrlAtLocationAndSize":
                     setImageUrlAtLocationAndSize(value);
-                break;
-                case "setImageUrlAtLens1":
-                    setImageUrlAtLens1(value);
-                break;
-                case "setImageUrlAtLens2":
-                    setImageUrlAtLens2(value);
-                break;
-                case "setImageUrlAtLens3":
-                    setImageUrlAtLens3(value);
-                break;
-                case "setImageUrlAtLens4":
-                    setImageUrlAtLens4(value);
                 break;
                 case "setColorRectAtLocationAndSize":
                     setColorRectAtLocationAndSize(value);
@@ -410,9 +350,9 @@ http://andreinc.net/2012/11/14/painting-and-wrapping-a-text-inside-a-rectangular
     </script>
 </head>
 <body>
-    <svg  xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"  id="lenscanvas" width="1920px" height="1080px" style="border: 2px solid black;">
+    <canvas id="lenscanvas" width="1920" height="1080">
 
-    </svg>
+    </canvas>
     <!--
     <input id="sendstring" type="text" size="80">
     <span id="sendit">send</span><BR>

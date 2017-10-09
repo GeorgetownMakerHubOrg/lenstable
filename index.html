@@ -94,6 +94,8 @@
         //    setImageUrlAtLocationAndSize("images/LaserCutter2.png|150|200|250|250|90");
 //            setColorRectAtLocationAndSize("red|150|100|50|50|0");
 //            setColorRectAtLocationAndSize("red|150|100|50|50|45");
+       //     setColorRectAtLens1("red");
+       //     setColorRectAtLens2("green");
 
         //    setTextAtLocationAndSize("Hello World Hello World|150|100|150|150|0");
             $("#sendit").click(function(){
@@ -104,7 +106,22 @@
 
         });
 
+        function setColorRectAtLens1(message){
+            setColorRectAtLocationAndSize(message+"|190|560|150|155|0");
 
+        }
+        function setColorRectAtLens2(message){
+            setColorRectAtLocationAndSize(message+"|460|445|155|155|0");
+
+        }
+        function setColorRectAtLens3(message){
+            setColorRectAtLocationAndSize(message+"|460|445|155|155|0");
+
+        }
+        function setColorRectAtLens4(message){
+            setColorRectAtLocationAndSize(message+"|460|445|155|155|0");
+
+        }
 
         
         function setColorRectAtLocationAndSize(message){
@@ -136,19 +153,17 @@
             if(!r){
                 r = 0;
             }
-//                tx = x + (w / 2 );
-//                ty = y + (h / 2);
-            tx = x;
-            ty = y;
+                tx = x + (w / 2 );
+                ty = y + (h / 2);
+           // tx = x;
+            //ty = y;
             console.log("translating " + tx + " , " + ty);
-            ctx.translate(tx, ty);
-            ctx.rotate(r * Math.PI / 180);
-            ctx.fillStyle = color;
-            ctx.rect(0 - (w / 2) ,0 - ( h /2), w, h);
-            ctx.fill();
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-            
+            var transform = "rotate("+r +" " +tx+ " " +ty+ ")";
+
+                console.log(transform);
+
+                $("#lenscanvas").append(parseSVG("<rect width='"+w+"px' height='"+h+"px' x='"+x+"' y='"+y+"' transform='"+transform+"' style='fill: "+color+";' />"));            
         }
 
         function setImageUrlAtLens1(message){
@@ -222,12 +237,6 @@
                 console.log(transform);
 
                 $("#lenscanvas").append(parseSVG("<image xlink:href='"+url+"' width='"+w+"px' height='"+h+"px' x='"+x+"' y='"+y+"' transform='"+transform+"' />"));
-/*
-                ctx.translate(tx, ty);
-                ctx.rotate(r * Math.PI / 180);
-                ctx.drawImage(image, 0 - (w / 2) ,0 - ( h /2), w, h);
-                ctx.setTransform(1, 0, 0, 1, 0, 0);
-                */
             };
             image.src = url;
         }

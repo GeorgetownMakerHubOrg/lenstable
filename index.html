@@ -268,11 +268,17 @@
             ctx.fillStyle = 'black';
             ctx.strokeStyle = 'black';
 
-            tx = x;
-            ty = y;
-//            tx = x + w/2;
-//            ty = y + h/2;
-//            console.log("translating " + tx  + " , " + ty);
+                tx = x + (w / 2 );
+                ty = y + (h / 2);
+//                tx = x;
+ //               ty = y;
+                console.log("translating " + tx + " , " + ty);
+
+//                var transform = " translate("+tx+" "+ty+") rotate("+r * Math.PI / 180+")";
+                var transform = "rotate("+r +" " +tx+ " " +ty+ ")";
+
+
+
             ctx.translate(tx, ty);
             ctx.rotate(r * Math.PI / 180);
             paint_centered_wrap(ctx, 0 - (w / 2) ,0 - ( h /2), w, h, text, 60, 1);           
@@ -331,6 +337,9 @@ http://andreinc.net/2012/11/14/painting-and-wrapping-a-text-inside-a-rectangular
 */
 
     paint_centered_wrap = function(ctx2d, x, y, w, h, text, fh, spl) {
+        // using svg instead, consider: https://bl.ocks.org/MSCAU/58bba77cdcae42fc2f44
+
+
         // The painting properties 
         // Normally I would write this as an input parameter
         var Paint = {

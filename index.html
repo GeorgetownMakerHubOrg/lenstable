@@ -272,7 +272,8 @@
             if(split.length >= 6){
                 r = parseFloat(split[5]);
             }
-                $("#lenscanvas").append(parseSVG("<text width='"+w+"px' height='"+h+"px' x='"+x+"' y='"+y+"'>"+message+"<text/>"));
+            $("#thetext").remove();
+                $("#lenscanvas").append(parseSVG("<text id='thetext' width='"+w+"px' height='"+h+"px' x='"+x+"' y='"+y+"'>"+message+"<text/>"));
             
             
             

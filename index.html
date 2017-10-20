@@ -244,9 +244,8 @@
         }
 
     
-        function setTexttLens1(message){
-            setImageUrlAtLocationAndSize(message+"|140|510|150|155|0");
-
+        function setTextAtLens1(message){
+            setTextAtLocationAndSize(message+"|140|510|150|155|0");
         }
     
         function setTextAtLocationAndSize(message){
@@ -273,8 +272,15 @@
                 r = parseFloat(split[5]);
             }
             $("#thetext").remove();
-                $("#lenscanvas").append(parseSVG("<text id='thetext' width='"+w+"px' height='"+h+"px' x='"+x+"' y='"+y+"'>"+message+"<text/>"));
-            
+//            $("#lenscanvas").append(parseSVG("<text fill='black' id='thetext' width='"+w+"px' height='"+h+"px' x='"+x+"' y='"+y+"'>"+message+"<text/>"));
+		$("#lenscanvas").fillStyle="black";
+		$("#lenscanvas").textAlign="center";
+		if(text=="" || text == NULL){
+			text="hi!!!!!!!!!!!!!!!! my name is jake!!!!";
+		}
+		$("#lenscanvas").fillText(text, x+20,y+20);
+		
+		            
             
             
             ctx.fillStyle = 'black';

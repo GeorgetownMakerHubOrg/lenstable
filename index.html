@@ -243,7 +243,12 @@
             image.src = url;
         }
 
-        
+    
+        function setTexttLens1(message){
+            setImageUrlAtLocationAndSize(message+"|140|510|150|155|0");
+
+        }
+    
         function setTextAtLocationAndSize(message){
             // format:
             // url|x|y|w|h|r
@@ -267,6 +272,10 @@
             if(split.length >= 6){
                 r = parseFloat(split[5]);
             }
+                $("#lenscanvas").append(parseSVG("<text width='"+w+"px' height='"+h+"px' x='"+x+"' y='"+y+"'>"+message+"<text/>"));
+            
+            
+            
             ctx.fillStyle = 'black';
             ctx.strokeStyle = 'black';
 
@@ -312,6 +321,9 @@
                 break
                 case "setTextAtLocationAndSize":
                     setTextAtLocationAndSize(value);
+                break;
+                case "setTextLens1":
+                    setTextAtLens1(value);
                 break;
                 default:
                     console.log("unknown command " + name);

@@ -242,10 +242,9 @@
             };
             image.src = url;
         }
-
     
         function setTextAtLens1(message){
-            setTextAtLocationAndSize(message+"|140|510|150|155|0");
+            setTextAtLocationAndSize(message+"|250|280|150|155|0");
         }
     
         function setTextAtLocationAndSize(message){
@@ -272,18 +271,14 @@
                 r = parseFloat(split[5]);
             }
             $("#thetext").remove();
-		$("#lenscanvas").font = "24px Arial";
-//		$("#lenscanvas").fillStyle="black";
-//		$("#lenscanvas").textAlign="center";
-		if(text=="" || text == NULL){
-			text="hi!!!!!!!!!!!!!!!! my name is jake!!!!";
-		}
-//		$("#lenscanvas").fillText(text, x+20,y+20);
-		$("#lenscanvas").append(parseSVG("<text fill='black' id='thetext' width='"+w+"px' height='"+h+"px' x='"+x+"' y='"+y+"'>"+message+"<text/>"));
-		            
-            ctx.fillStyle = 'black';
-            ctx.strokeStyle = 'black';
 
+		  $("#lenscanvas").append(parseSVG("<text fill='black' id='thetext' width='"+w+"px' height='"+h+"px' x='"+x+"' y='"+y+"'>"+text+"<text/>"));
+		  $("#lenscanvas").font = "24px Arial";
+          $("text").css("fontFamily","Helvetica");
+          $("text").css("size","18pt");
+
+
+/*
                 tx = x + (w / 2 );
                 ty = y + (h / 2);
 //                tx = x;
@@ -299,7 +294,7 @@
             ctx.rotate(r * Math.PI / 180);
             paint_centered_wrap(ctx, 0 - (w / 2) ,0 - ( h /2), w, h, text, 60, 1);           
             ctx.setTransform(1, 0, 0, 1, 0, 0);
-            
+            */
             
         }
 
@@ -312,6 +307,8 @@
                 case "setImageUrlAtLens1":
                     setImageUrlAtLens1(value);
                 break;
+                case "setTextAtLens1":
+                    setTextAtLens1(value);
                 case "setImageUrlAtLens2":
                     setImageUrlAtLens2(value);
                 break;

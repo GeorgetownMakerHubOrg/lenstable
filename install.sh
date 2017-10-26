@@ -10,6 +10,14 @@
 sudo apt-get update
 sudo apt-get upgrade
 
+# add a cron line to automatically update the github every hour:
+(crontab -l 2>/dev/null; echo "0 * * * * /home/pi/lenstable/gitupdate.sh ") | crontab -
+chmod a+x /home/pi/lenstable/gitupdate.sh
+
+# crontab as root to update time
+(sudo crontab -l 2>/dev/null; echo "0 * * * * /usr/sbin/ntpdate -u time.nist.gov ") | sudo crontab -
+
+
 # copy wpa_supplicant and interfaces files into place
 sudo cp etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf
 # then edit this file for your specific network needs

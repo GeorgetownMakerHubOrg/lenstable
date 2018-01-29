@@ -11,6 +11,11 @@
 sudo apt-get update
 sudo apt-get upgrade
 
+# install ntpdate
+sudo apt-get install ntpdate
+# update the time
+sudo ntpdate -u time.nist.gov
+
 # add a cron line to automatically update the github every hour:
 (crontab -l 2>/dev/null; echo "0 * * * * /home/pi/lenstable/gitupdate.sh ") | crontab -
 chmod a+x /home/pi/lenstable/gitupdate.sh
@@ -30,10 +35,7 @@ sudo cp etc/network/interfaces /etc/network/interfaces
 cp home/pi/network_up.sh /home/pi/network_up.sh
 chmod a+x /home/pi/network_up.sh
 
-# install ntpdate
-sudo apt-get install ntpdate
-# update the time
-sudo ntpdate -u time.nist.gov
+
 
 # install chromium
 sudo apt-get install chromium-browser x11-xserver-utils unclutter
@@ -48,7 +50,9 @@ sudo cp home/pi/dot_config/lxsession/LXDE-pi/autostart /home/pi/.config/lxsessio
 sudo apt-get install mlocate
 
 #set some Chromium preferences
-sed -i 's/"exited_cleanly": false/"exited_cleanly": true/' ~/.config/chromium/Default/Preferences
+# add this to .bashrc
+sed -i 's/"exited_cleanly":[ ]*false/"exited_cleanly":true/' ~/.config/chromium/Default/Preferences
+sed -i 's/"exit_type":[ ]*"Crashed"/"exit_type":"None"/' ~/.config/chromium/Default/Preferences
 
 #now edit raspi-config to:
 # allow ssh

@@ -51,8 +51,10 @@ sudo apt-get install mlocate
 
 #set some Chromium preferences
 # add this to .bashrc
-sed -i 's/"exited_cleanly":[ ]*false/"exited_cleanly":true/' ~/.config/chromium/Default/Preferences
-sed -i 's/"exit_type":[ ]*"Crashed"/"exit_type":"None"/' ~/.config/chromium/Default/Preferences
+#sed -i 's/"exited_cleanly":[ ]*false/"exited_cleanly":true/' ~/.config/chromium/Default/Preferences
+#sed -i 's/"exit_type":[ ]*"Crashed"/"exit_type":"None"/' ~/.config/chromium/Default/Preferences
+cat add_to_bashrc.sh >> ~/.bashrc
+
 
 #now edit raspi-config to:
 # allow ssh

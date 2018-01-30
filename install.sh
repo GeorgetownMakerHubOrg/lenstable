@@ -8,6 +8,7 @@
 # cd lenstable
 # run this file
 
+# these two lines take the longest to run
 sudo apt-get update
 sudo apt-get upgrade
 
@@ -18,9 +19,6 @@ sudo ntpdate -u time.nist.gov
 
 # crontab as root to update time
 (sudo crontab -l 2>/dev/null; echo "0 * * * * /usr/sbin/ntpdate -u time.nist.gov ") | sudo crontab -
-
-# add a cron line to automatically update the github every hour:
-(crontab -l 2>/dev/null; echo "0 * * * * /home/pi/lenstable/gitupdate.sh ") | crontab -
 chmod a+x /home/pi/lenstable/gitupdate.sh
 
 ########
@@ -62,7 +60,8 @@ sudo apt-get install mlocate
 # edit /boot/config.txt if you want screen rotation. add line
 # display_rotate=X
 # where X is 0,1,2,3 for rotating 0, 90, 180, or 270 degrees
-
+# set the timezone
+# set the keyboard locale to US (Usually)
 
 
 

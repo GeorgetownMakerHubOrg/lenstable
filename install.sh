@@ -20,6 +20,7 @@ sudo ntpdate -u time.nist.gov
 # crontab as root to update time
 (sudo crontab -l 2>/dev/null; echo "0 * * * * /usr/sbin/ntpdate -u time.nist.gov ") | sudo crontab -
 chmod a+x /home/pi/lenstable/gitupdate.sh
+(crontab -l 2>/dev/null; echo "0 * * * *  /home/pi/lenstable/gitupdate.sh") | crontab -
 
 ########
 # Network stuff

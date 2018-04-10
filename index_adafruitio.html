@@ -58,7 +58,7 @@ $(document).ready(function(){
          var feeds = data.feeds.filter(function(f){return f.name = feedname});
          if(feeds.length > 0){
             stream = feeds[0].stream;
-            if(prev_stream_id != stream.id){
+            if(stream && prev_stream_id != stream.id){
               prev_stream_id = stream.id;
               callback(stream.value);
             }else{

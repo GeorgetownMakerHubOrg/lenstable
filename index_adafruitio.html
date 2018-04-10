@@ -47,7 +47,8 @@ $(document).ready(function(){
 
   var prev_stream_id = false;
   function poll_message(callback){
-    var receiveurl = "https://io.adafruit.com/api/groups/"+group+"/receive.json?x-aio-key="+key
+    var receiveurl = "https://io.adafruit.com/api/groups/"+group+"/receive.json?x-aio-key="+key;
+//    var receiveurl = "https://io.adafruit.com/feeds/"+feedname+"?x-aio-key="+key;
     $.ajax({
       url : receiveurl,
       success: function(data){

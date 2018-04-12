@@ -49,7 +49,7 @@ sudo cp home/pi/dot_config/lxsession/LXDE-pi/autostart /home/pi/.config/lxsessio
 # add this to .bashrc, it prevents an error window in chrome when you do a hard restart.
 #sed -i 's/"exited_cleanly":[ ]*false/"exited_cleanly":true/' ~/.config/chromium/Default/Preferences
 #sed -i 's/"exit_type":[ ]*"Crashed"/"exit_type":"None"/' ~/.config/chromium/Default/Preferences
-cat add_to_bashrc.sh >> ~/.bashrc
+#cat add_to_bashrc.sh >> ~/.bashrc
 
 #install mlocate, which helps us find files  using locate
 sudo apt-get install mlocate

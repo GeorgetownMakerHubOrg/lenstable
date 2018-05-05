@@ -1,0 +1,22 @@
+<html>
+<head>
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+    $().ready(function(){
+        var refreshPage = function(){
+        	var iframe  =  document.getElementById('myframe');
+        	var tmp_src = iframe.src; iframe.src = ''; iframe.src = tmp_src;
+          setTimeout(refreshPage, 300000);
+        }
+        refreshPage();
+    });
+    </script>
+    
+</head>
+<body style="overflow: hidden;">
+    <div style="width:1280px;height:1024;overflow:hidden;border:0px;margin-top:-10px;margin-left:-10px;margin-bottom:-10px;margin-right:-10px" >
+    <iframe id="myframe" src="https://docs.google.com/presentation/d/e/2PACX-1vTCeOXkgtWca4Pq_gdwtpnsWLo3oBVDBPirEqUakEzLg0IkO9RKTo7Pvb_RtiP7lvqnj_v9C8GOe7Ez/embed?start=true&amp;loop=true&amp;delayms=10000" frameborder="0" width="1300" height="1055" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
+</iframe>
+    </div>
+    </body>
+</html>

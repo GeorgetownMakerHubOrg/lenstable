@@ -9,6 +9,77 @@ or have a more generic implementation
 
 <script type="text/javascript"> 
     
+    
+function setupAIOMessageContainer(containerClass){
+ 
+  var key = ""; // put AIO key here
+  var group = "MakerHubEvents";
+  var feedname= "signagemessage";
+  var prev_stream_id = false;
+  var messageDiv = false;
+  
+  messageDiv = $('<div id="Alert" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto;"><div style="background-color: #00FF00; color: white; font-size: 16; margin: 15% auto; padding: 20px; border: 10px solid #F0004E; width: 80%; "><br/><br/>  <h1 style="font-size: 80px; text-align: center; vertical-align: center; text-transform: uppercase;">Door Bell!!!</h1><br/><br/></div></div>');
+  $(containerClass).append(messageDiv);
+  $(messageDiv).hide();
+  function lockAlert(callback){
+    var receiveurl = "https://io.adafruit.com/api/groups/"+group+"/receive.json?x-aio-key="+key
+    $.ajax({
+      url : receiveurl,
+      success: function(data){
+         console.log("receive success");
+         console.log(data);
+         var stream = false;
+         var feeds = data.feeds.filter(function(f){return f.name = feedname});
+         if(feeds.length > 0){
+            stream = feeds[0].stream;
+            if(prev_stream_id && prev_stream_id != stream.id){
+              prev_stream_id = stream.id;
+              callback(stream.value);             
+            }
+            else{
+              prev_stream_id = stream.id;
+            //    console.log("same value");
+            }
+         }
+      },
+      error: function (error){
+        console.log("recieve error");
+        console.log(error);
+      }
+    });
+  }
+  
+  function show()  {
+  	$(messageDiv).show();
+  }
+  function hide()  {
+    $(messageDiv).hide();
+    
+  }
+  
+  var running = false;
+  function setNotRunning(){
+    running = false;
+  }
+  function blink(){
+    if(!running){
+      running = true;
+      for(var i=900; i < 10000; i=i+900){
+        x=true;
+        setTimeout(show,i);	
+        setTimeout(hide,i+450);
+        x=false;	
+      }
+      setTimeout(setNotRunning, i+450);
+      //document.getElementById('Alert').style.display= "none";
+    }
+  } 
+  
+  
+  setInterval(function(){lockAlert(blink);}, 3000);   
+    
+}
+    
 function setupDoorbell(containerClass){
   var key = ""; // put AIO key here
   var group = "MakerHubEvents";

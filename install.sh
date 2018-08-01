@@ -9,11 +9,11 @@
 # run this file
 
 # these two lines take the longest to run
-sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get -y update
+sudo apt-get -y upgrade
 
 # install ntpdate
-sudo apt-get install ntpdate
+sudo apt-get -y install ntpdate
 # update the time
 sudo ntpdate -u time.nist.gov
 
@@ -39,7 +39,7 @@ chmod a+x /home/pi/network_up.sh
 
 # browser install and auto-start
 # install chromium
-sudo apt-get install chromium-browser x11-xserver-utils unclutter
+sudo apt-get -y install chromium-browser x11-xserver-utils unclutter
 # copy lxsession config file, which turns off screensavers, and other stuff for better kiosk mode. 
 # and also boots chrome with the right options.
 # then edit autostart for the html file you want to display
@@ -52,7 +52,7 @@ sudo cp home/pi/dot_config/lxsession/LXDE-pi/autostart /home/pi/.config/lxsessio
 #cat add_to_bashrc.sh >> ~/.bashrc
 
 #install mlocate, which helps us find files  using locate
-sudo apt-get install mlocate
+sudo apt-get -y install mlocate
 
 #now edit raspi-config to:
 # allow ssh

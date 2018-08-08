@@ -1,8 +1,17 @@
 <html>
 <head>
     <title>Who's on Shift at the Maker Hub?</title>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous" ></script>
+<script src="js/jqueryAIO.js" defer></script>
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js" type="text/javascript"></script>
+
 </head>
 <body style="margin:0px;">
+<div class="doorbellcontainer"></div>
+<div class="aiomessagecontainer"></div>
 
 
 <iframe src="https://script.google.com/macros/s/AKfycbw8QLj8Tj2B_KVIHPpn-SUipb7ZwgkbVcrp1z-B8m9w35dTBhA/exec" width="1350" height="750" style="border:none;"/> 
@@ -11,7 +20,33 @@
 
 
 
+<script>
 
+$(function(){
+
+
+  $(".doorbellcontainer").aioAlert({
+    group : "MakerHubEvents",
+    feedname : "backdoorbell",
+    fontcolor : "black",
+    textOverride : "DOORBELL",
+    bordercolor : "#F0004E",
+    bgcolor1 : "red",
+    bgcolor2 : "yellow"
+  });
+ 
+ 
+  $(".aiomessagecontainer").aioAlert({
+    group : "MakerHubEvents",
+    feedname : "signagemessage",
+    fontcolor : "black",
+    bordercolor : "#F0004E",
+    bgcolor1 : "blue",
+    bgcolor2 : "green"
+  });
+});
+
+</script>
 </body>
 
 </html>

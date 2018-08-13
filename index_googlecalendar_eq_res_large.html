@@ -1,0 +1,73 @@
+<html>
+<head>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous" ></script>
+<script src="js/jqueryAIO.min.js" defer></script>
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js" type="text/javascript"></script>
+
+
+</head>
+<body>
+
+<div style="font-size:2.2em;text-align:center;width:1800px;margin-bottom:5px">Maker Hub Equipment Reservations</div>
+<div style="font-size:1.2em;text-align:center;width:1800px;margin-bottom:5px">See Staff to Make a Reservation</div>
+
+<div class="calendar"></div>
+<div class="doorbellcontainer"></div>
+<div class="aiomessagecontainer"></div>
+<div class="addtome"></div>
+
+<script type="text/javascript"> 
+       
+
+$(function(){
+
+
+
+  function placeCalendar(){
+    var date = new Date(); 
+    var year = date.getFullYear(); 
+    var month = date.getMonth(); 
+    month=month+1; 
+    if (month < 10) 
+        month = "0" + month; 
+    var day= date.getDate(); 
+    if (day < 10) 
+        day = "0" + day; 
+    var datestring=year+month+day; 
+    //https://calendar.google.com/calendar/embed?showNav=0&amp;showPrint=0&amp;&amp;mode=DAY&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;showTitle=0&amp;showDate=0&amp;mode=WEEK&amp;dates="+datestring+"/"+datestring+"&amp;height=1240&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=georgetown.edu_i0bt8dt9hb0gbcsueu21tko9cs%40group.calendar.google.com&amp;color=%2329527A&amp;ctz=America%2FNew_York
+
+    //\"https://www.google.com/calendar/b/0/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0&amp;mode=DAY&amp;dates="+datestring+"/"+datestring+"&amp;height=440&amp;wkst=2&amp;hl=en_GB&amp;bgcolor=%23ffffff&amp;src=[YOUR CALENDAR URL];color=%238C500B&amp;ctz=Europe%2FBerlin\"
+
+    $(".calendar").html("<iframe scrolling=\"yes\" src=\"https://calendar.google.com/calendar/embed?showNav=0&amp;showPrint=0&amp;&amp;mode=DAY&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;showTitle=0&amp;showDate=0&amp;mode=WEEK&amp;dates="+datestring+"/"+datestring+"&amp;height=1240&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=georgetown.edu_i0bt8dt9hb0gbcsueu21tko9cs%40group.calendar.google.com&amp;color=%2329527A&amp;ctz=America%2FNew_York\" style=\" border-width:0 \" width=\"1800\" height=\"880\" frameborder=\"0\" scrolling=\"no\"></iframe>"); 
+  }
+
+//  setupAIOMessageContainer(".aiomessagecontainer");
+  $(".doorbellcontainer").aioAlert({
+    group : "MakerHubEvents",
+    feedname : "backdoorbell",
+    fontcolor : "black",
+    textOverride : "DOORBELL",
+    bordercolor : "#F0004E",
+    bgcolor1 : "red",
+    bgcolor2 : "yellow"
+  });
+ 
+ 
+  $(".aiomessagecontainer").aioAlert({
+    group : "MakerHubEvents",
+    feedname : "signagemessage",
+    fontcolor : "black",
+    bordercolor : "#F0004E",
+    bgcolor1 : "lightgreen",
+    bgcolor2 : "green"
+  });
+  placeCalendar();
+  setInterval(placeCalendar, 60000);
+
+});
+</script>
+</body>
+</html>

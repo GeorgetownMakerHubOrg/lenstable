@@ -1,0 +1,55 @@
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment-with-locales.min.js"
+    crossorigin="anonymous" defer></script>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous" ></script>
+<script src="js/jqueryAIO.min.js" defer></script>
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js" type="text/javascript"></script>
+
+
+</head>
+<body>
+
+<div style="font-size:2.2em;text-align:center;width:1800px;margin:auto;margin-bottom:5px;background-color:lightgreen;">Maker Hub Equipment Reservations</div>
+<div style="font-size:1.2em;text-align:center;width:1800px;margin-bottom:5px;color:blue;">See Staff to Make a Reservation</div>
+
+<iframe src="https://script.google.com/macros/s/AKfycbw0tBzpr5ZkPvHbOewcWunXmVwhADF7LNo06cseq1vT1Ytf-Gk/exec" style="border-width:0" width="1800" height="880"  frameborder="0" scrolling="no"/> 
+
+<div class="doorbellcontainer"></div>
+<div class="aiomessagecontainer"></div>
+<div class="addtome"></div>
+
+<script type="text/javascript"> 
+       
+
+$(function(){
+
+
+//  setupAIOMessageContainer(".aiomessagecontainer");
+  $(".doorbellcontainer").aioAlert({
+    group : "MakerHubEvents",
+    feedname : "backdoorbell",
+    fontcolor : "black",
+    textOverride : "DOORBELL",
+    bordercolor : "#F0004E",
+    bgcolor1 : "red",
+    bgcolor2 : "yellow"
+  });
+ 
+ 
+  $(".aiomessagecontainer").aioAlert({
+    group : "MakerHubEvents",
+    feedname : "signagemessage",
+    fontcolor : "black",
+    bordercolor : "#F0004E",
+    bgcolor1 : "lightgreen",
+    bgcolor2 : "green"
+  });
+
+});
+</script>
+</body>
+</html>

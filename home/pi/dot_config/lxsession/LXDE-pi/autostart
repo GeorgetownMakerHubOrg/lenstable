@@ -8,4 +8,4 @@
 @touch /home/pi/xstart.txt
 @sed -i 's/"exited_cleanly":[ ]*false/"exited_cleanly":true/' ~/.config/google-chrome/Default/Preferences
 @sed -i 's/"exit_type":[ ]*"Crashed"/"exit_type":"None"/' ~/.config/google-chrome/Default/Preferences
-@chromium-browser --noerrdialogs --kiosk --restore-last-session --kiosk file:///home/pi/lenstable/index_googlerefresh.html
+@chromium-browser --noerrdialogs --kiosk --incognito file:///home/pi/lenstable/index_googlerefresh.html

@@ -3,7 +3,10 @@
     <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous" ></script>
+<script src="js/jqueryAIO.min.js" defer></script>
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js" type="text/javascript"></script>
+
 
 </head>
 <body>
@@ -13,82 +16,14 @@
 
 <div class="calendar"></div>
 <div class="doorbellcontainer"></div>
-
+<div class="aiomessagecontainer"></div>
+<div class="addtome"></div>
 
 <script type="text/javascript"> 
-    
-function setupDoorbell(containerClass){
-  var key = "4f50c525fc714b0593734ac7582c63ed"; // put AIO key here
-  var group = "MakerHubEvents";
-  var feedname= "backdoorbell";
-  var prev_stream_id = false;
-  var doorbellDiv = false;
-  
-  doorbellDiv = $('<div id="Alert" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto;"><div style="background-color: #D00660; color: white; font-size: 16; margin: 15% auto; padding: 20px; border: 10px solid #F0004E; width: 80%; "><br/><br/>  <h1 style="font-size: 80px; text-align: center; vertical-align: center; text-transform: uppercase;">Door Bell!!!</h1><br/><br/></div></div>');
-  $(containerClass).append(doorbellDiv);
-  $(doorbellDiv).hide();
-
-  function lockAlert(callback){
-    var receiveurl = "https://io.adafruit.com/api/groups/"+group+"/receive.json?x-aio-key="+key
-    $.ajax({
-      url : receiveurl,
-      success: function(data){
-         console.log("receive success");
-         console.log(data);
-         var stream = false;
-         var feeds = data.feeds.filter(function(f){return f.name = feedname});
-         if(feeds.length > 0){
-            stream = feeds[0].stream;
-            if(prev_stream_id && prev_stream_id != stream.id){
-              prev_stream_id = stream.id;
-              callback(stream.value);             
-            }
-            else{
-              prev_stream_id = stream.id;
-            //    console.log("same value");
-            }
-         }
-      },
-      error: function (error){
-        console.log("recieve error");
-        console.log(error);
-      }
-    });
-  }
-  
-  function show()  {
-  	$(doorbellDiv).show();
-  }
-  function hide()  {
-    $(doorbellDiv).hide();
-    
-  }
-  
-  var running = false;
-  function setNotRunning(){
-    running = false;
-  }
-  function blink(){
-    if(!running){
-      running = true;
-      for(var i=900; i < 10000; i=i+900){
-        x=true;
-        setTimeout(show,i);	
-        setTimeout(hide,i+450);
-        x=false;	
-      }
-      setTimeout(setNotRunning, i+450);
-      //document.getElementById('Alert').style.display= "none";
-    }
-  } 
-  
-  
-  setInterval(function(){lockAlert(blink);}, 3000);
-
-
-}    
+       
 
 $(function(){
+
 
 
   function placeCalendar(){
@@ -106,10 +41,38 @@ $(function(){
 
     //\"https://www.google.com/calendar/b/0/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0&amp;mode=DAY&amp;dates="+datestring+"/"+datestring+"&amp;height=440&amp;wkst=2&amp;hl=en_GB&amp;bgcolor=%23ffffff&amp;src=[YOUR CALENDAR URL];color=%238C500B&amp;ctz=Europe%2FBerlin\"
 
-    $(".calendar").html("<iframe scrolling=\"yes\" src=\"https://calendar.google.com/calendar/embed?showNav=0&amp;showPrint=0&amp;&amp;mode=DAY&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;showTitle=0&amp;showDate=0&amp;mode=WEEK&amp;dates="+datestring+"/"+datestring+"&amp;height=1240&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=georgetown.edu_i0bt8dt9hb0gbcsueu21tko9cs%40group.calendar.google.com&amp;color=%2329527A&amp;ctz=America%2FNew_York\" style=\" border-width:0 \" width=\"1200\" height=\"880\" frameborder=\"0\" scrolling=\"no\"></iframe>"); 
+//<iframe src="https://calendar.google.com/calendar/embed?src=georgetown.edu_i0bt8dt9hb0gbcsueu21tko9cs%40group.calendar.google.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+   // $(".calendar").html("<iframe scrolling=\"yes\" src=\"https://calendar.google.com/calendar/embed?output=embed&amp;showNav=0&amp;showPrint=0&amp;&amp;mode=DAY&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;showTitle=0&amp;showDate=0&amp;mode=WEEK&amp;dates="+datestring+"/"+datestring+"&amp;height=1240&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=georgetown.edu_i0bt8dt9hb0gbcsueu21tko9cs%40group.calendar.google.com&amp;color=%2329527A&amp;ctz=America%2FNew_York\" style=\" border-width:0 \" width=\"1200\" height=\"880\" frameborder=\"0\" scrolling=\"no\"></iframe>"); 
+
+    $(".calendar").html('<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;mode=DAY&amp;height=1240&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=georgetown.edu_i0bt8dt9hb0gbcsueu21tko9cs%40group.calendar.google.com&amp;color=%23711616&amp;ctz=America%2FNew_York" style="border-width:0" width="1200" height="880" frameborder="0" scrolling="no"></iframe>');
+ 
+
+
+
   }
 
-  setupDoorbell(".doorbellcontainer");
+//  setupAIOMessageContainer(".aiomessagecontainer");
+  $(".doorbellcontainer").aioAlert({
+    group : "MakerHubEvents",
+    feedname : "backdoorbell",
+    fontcolor : "black",
+    textOverride : "DOORBELL",
+    bordercolor : "#F0004E",
+    bgcolor1 : "red",
+    bgcolor2 : "yellow"
+  });
+ 
+ 
+  $(".aiomessagecontainer").aioAlert({
+    group : "MakerHubEvents",
+    feedname : "signagemessage",
+    fontcolor : "black",
+    bordercolor : "#F0004E",
+    bgcolor1 : "lightgreen",
+    bgcolor2 : "green"
+  });
+  placeCalendar();
   setInterval(placeCalendar, 60000);
 
 });

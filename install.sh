@@ -9,8 +9,8 @@
 # run this file
 
 # these two lines take the longest to run
-sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get -y update
+sudo apt-get -y upgrade
 
 # install ntpdate
 sudo apt-get install ntpdate
@@ -30,8 +30,8 @@ chmod a+x /home/pi/lenstable/gitupdate.sh
 #sudo cp etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf
 
 # then edit this file for your specific network needs
-sudo cp  /etc/network/interfaces /etc/network/interfaces.bak
-sudo cp etc/network/interfaces /etc/network/interfaces
+#udo cp  /etc/network/interfaces /etc/network/interfaces.bak
+#sudo cp etc/network/interfaces /etc/network/interfaces
 #install network_up, which specifies things that happen once the network is up.
 cp home/pi/network_up.sh /home/pi/network_up.sh
 chmod a+x /home/pi/network_up.sh

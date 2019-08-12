@@ -25,3 +25,6 @@ DISPLAY=:0.0
 
 # Pull code updates for lenstable every hour
 0 * * * * cd /home/pi/lenstable && git pull &>/dev/null
+
+# Refresh crontab after pulling from git; this may be questionable...
+5 * * * * crontab /home/pi/lenstable/cron/crontab &>/dev/null

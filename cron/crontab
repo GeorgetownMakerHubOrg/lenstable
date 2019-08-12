@@ -17,8 +17,8 @@ DISPLAY=:0.0
 0 7 * * * ~/display-on.sh
 
 # Turn display off at 9 PM, and after the nightly reboot
-0 21 * * * ~/display-off.sh
-10 3 * * * ~/display-off.sh
+# 0 21 * * * ~/display-off.sh
+# 10 3 * * * ~/display-off.sh
 
 # Reload webpage every 30 minutes after the hour
 30 * * * * xdotool key ctrl+R

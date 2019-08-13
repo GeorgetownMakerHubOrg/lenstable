@@ -1,0 +1,30 @@
+DISPLAY=:0.0
+
+# ┌───────────── minute (0 - 59)
+# │ ┌───────────── hour (0 - 23)
+# │ │ ┌───────────── day of month (1 - 31)
+# │ │ │ ┌───────────── month (1 - 12)
+# │ │ │ │ ┌───────────── day of week (0 - 6) (Sunday to Saturday;
+# │ │ │ │ │                                       7 is also Sunday on some systems)
+# │ │ │ │ │
+# │ │ │ │ │
+# * * * * *  command to execute
+
+# Reboot the Pi every night at 3 AM to ensure smooth operation
+0 3 * * * sudo reboot
+
+# Turn display on at 7 AM
+0 7 * * * ~/display-on.sh
+
+# Turn display off at 9 PM, and after the nightly reboot
+# 0 21 * * * ~/display-off.sh
+# 10 3 * * * ~/display-off.sh
+
+# Reload webpage every 30 minutes after the hour
+30 * * * * xdotool key ctrl+R
+
+# Pull code updates for lenstable every hour
+0 * * * * cd /home/pi/lenstable && git pull &>/dev/null
+
+# Refresh crontab after pulling from git; this may be questionable...
+5 * * * * crontab /home/pi/lenstable/cron/crontab &>/dev/null

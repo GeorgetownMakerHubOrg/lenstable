@@ -14,7 +14,7 @@ DISPLAY=:0.0
 0 3 * * * sudo reboot
 
 # Turn display on at 7 AM
-0 7 * * * ~/display-on.sh
+# 0 7 * * * ~/display-on.sh
 
 # Turn display off at 9 PM, and after the nightly reboot
 # 0 21 * * * ~/display-off.sh
